@@ -1,3 +1,4 @@
+google.charts.load('current', {packages: ['corechart', 'line']});
 google.charts.setOnLoadCallback(drawBackgroundColor);
 
 function drawBackgroundColor() {

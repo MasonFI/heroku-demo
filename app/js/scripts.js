@@ -1,20 +1,17 @@
 $(document).ready(
 		function() {
-			function array_flip( trans )
-			{
-			    var key, tmp_ar = {};
+			function array_flip(trans) {
+				var key, tmp_ar = {};
 
-			    for ( key in trans )
-			    {
-			        if ( trans.hasOwnProperty( key ) )
-			        {
-			            tmp_ar[trans[key]] = key;
-			        }
-			    }
+				for (key in trans) {
+					if (trans.hasOwnProperty(key)) {
+						tmp_ar[trans[key]] = key;
+					}
+				}
 
-			    return tmp_ar;
+				return tmp_ar;
 			}
-			
+
 			google.charts.load('current', {
 				packages : [ 'corechart', 'line' ]
 			});
@@ -25,21 +22,6 @@ $(document).ready(
 				data.addColumn('string', 'Vuosi');
 				data.addColumn('number', 'Kangasniemi');
 
-				var options = {
-					chart: {
-						title: 'Etelä-Savon kesämökkien määrä',
-						subtitle: 'Tämä on alaotsikko'
-					},
-					hAxis : {
-						title : 'Vuosi'
-					},
-					vAxis : {
-						title : 'Määrä'
-					},
-					backgroundColor : '#f1f8e9',
-					pointSize: 8,
-				};
-
 				console.log(jQuery);
 				console.log($);
 				var json = $.getJSON("../stats/kesamokit.json", function(json) {
@@ -48,11 +30,27 @@ $(document).ready(
 					var years = json.dataset.dimension.Vuosi.category.index;
 					years = array_flip(years);
 					console.log(years);
+					var maxValue = 0;
 					$.each(json.dataset.value, function(key, value) {
 						console.log(key, value);
-						data.addRows([[years[key], value]]);
+						data.addRows([ [ years[key], value ] ]);
+						if (maxValue < value) {
+							maxValue = value;
+						}
 					});
-					
+
+					var options = {
+						title : 'Etelä-Savon kesämökkien määrä',
+						hAxis : {
+							title : 'Vuosi'
+						},
+						vAxis : {
+							title : 'Määrä'
+						},
+						backgroundColor : '#f1f8e9',
+						pointSize : 8
+					};
+
 					// data.addRows([ [ 0, 0 ], [ 1, 10 ], [ 2, 23 ], [ 3, 17 ],
 					// [ 4, 18 ],
 					// [ 5, 9 ], [ 6, 11 ], [ 7, 27 ], [ 8, 33 ], [ 9, 40 ], [

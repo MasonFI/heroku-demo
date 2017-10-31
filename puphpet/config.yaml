@@ -131,7 +131,7 @@ nginx:
             server_name: heroku.local
             server_aliases:
                 - www.heroku.local
-            www_root: /var/www/heroku-demo
+            www_root: /var/www/heroku-demo/app
             listen_port: '80'
             client_max_body_size: 1m
             ssl: '0'

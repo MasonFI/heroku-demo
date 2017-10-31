@@ -1,0 +1,12 @@
+{
+    "name": "joonasmanninen/heroku-demo",
+    "description": "Testing diffrent stuff with Heroku",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Joonas Manninen",
+            "email": "joonas.manninen@prospectum.fi"
+        }
+    ],
+    "require": {}
+}
